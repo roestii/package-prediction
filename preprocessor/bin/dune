@@ -1,0 +1,4 @@
+(executable
+ (public_name preprocessor)
+ (name main)
+ (libraries preprocessor))
