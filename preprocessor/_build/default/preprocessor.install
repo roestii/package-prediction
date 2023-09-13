@@ -1,0 +1,8 @@
+lib: [
+  "_build/install/default/lib/preprocessor/META"
+  "_build/install/default/lib/preprocessor/dune-package"
+  "_build/install/default/lib/preprocessor/opam"
+]
+bin: [
+  "_build/install/default/bin/preprocessor"
+]

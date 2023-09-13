@@ -1,0 +1,5 @@
+(executable
+ (public_name preprocessor)
+ (name main)
+ (libraries preprocessor core owl)
+ (preprocess pps ppx_jane)

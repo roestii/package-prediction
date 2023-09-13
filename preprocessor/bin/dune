@@ -1,4 +1,5 @@
 (executable
  (public_name preprocessor)
  (name main)
- (libraries preprocessor))
+ (libraries preprocessor core owl)
+ (preprocess (pps ppx_deriving.show)))
