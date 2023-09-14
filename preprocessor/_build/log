@@ -3,7 +3,7 @@
 # Shared cache: disabled
 # Workspace root: /home/louis/personal/package_prediction/preprocessor
 # Auto-detected concurrency: 12
-$ /usr/bin/ocamlc.opt -config > /tmp/dune_152e35_output
+$ /home/louis/.opam/default/bin/ocamlc.opt -config > /tmp/dune_24fa8d_output
 # Dune context:
 #  { name = "default"
 #  ; kind = "default"
@@ -12,17 +12,17 @@ $ /usr/bin/ocamlc.opt -config > /tmp/dune_152e35_output
 #  ; for_host = None
 #  ; fdo_target_exe = None
 #  ; build_dir = In_build_dir "default"
-#  ; ocaml_bin = External "/usr/bin"
-#  ; ocaml = Ok External "/usr/bin/ocaml"
-#  ; ocamlc = External "/usr/bin/ocamlc.opt"
-#  ; ocamlopt = Ok External "/usr/bin/ocamlopt.opt"
-#  ; ocamldep = Ok External "/usr/bin/ocamldep.opt"
-#  ; ocamlmklib = Ok External "/usr/bin/ocamlmklib.opt"
+#  ; ocaml_bin = External "/home/louis/.opam/default/bin"
+#  ; ocaml = Ok External "/home/louis/.opam/default/bin/ocaml"
+#  ; ocamlc = External "/home/louis/.opam/default/bin/ocamlc.opt"
+#  ; ocamlopt = Ok External "/home/louis/.opam/default/bin/ocamlopt.opt"
+#  ; ocamldep = Ok External "/home/louis/.opam/default/bin/ocamldep.opt"
+#  ; ocamlmklib = Ok External "/home/louis/.opam/default/bin/ocamlmklib.opt"
 #  ; env =
 #      map
 #        { "DUNE_OCAML_HARDCODED" :
-#            "/usr/lib/ocaml:/home/louis/.opam/default/lib"
-#        ; "DUNE_OCAML_STDLIB" : "/usr/lib/ocaml"
+#            "/home/louis/.opam/default/lib/ocaml:/home/louis/.opam/default/lib"
+#        ; "DUNE_OCAML_STDLIB" : "/home/louis/.opam/default/lib/ocaml"
 #        ; "DUNE_SOURCEROOT" :
 #            "/home/louis/personal/package_prediction/preprocessor"
 #        ; "INSIDE_DUNE" :
@@ -37,65 +37,23 @@ $ /usr/bin/ocamlc.opt -config > /tmp/dune_152e35_output
 #        ; "OPAMCOLOR" : "always"
 #        }
 #  ; findlib_paths =
-#      [ External "/usr/lib/ocaml"; External "/home/louis/.opam/default/lib" ]
+#      [ External "/home/louis/.opam/default/lib/ocaml"
+#      ; External "/home/louis/.opam/default/lib"
+#      ]
 #  ; natdynlink_supported = true
 #  ; supports_shared_libraries = true
 #  ; ocaml_config =
 #      { version = "5.0.0"
-#      ; standard_library_default = "/usr/lib/ocaml"
-#      ; standard_library = "/usr/lib/ocaml"
+#      ; standard_library_default = "/home/louis/.opam/default/lib/ocaml"
+#      ; standard_library = "/home/louis/.opam/default/lib/ocaml"
 #      ; standard_runtime = "the_standard_runtime_variable_was_deleted"
 #      ; ccomp_type = "cc"
 #      ; c_compiler = "gcc"
 #      ; ocamlc_cflags =
-#          [ "-O2"
-#          ; "-fno-strict-aliasing"
-#          ; "-fwrapv"
-#          ; "-pthread"
-#          ; "-g"
-#          ; "-fno-omit-frame-pointer"
-#          ; "-fPIC"
-#          ; "-march=x86-64"
-#          ; "-mtune=generic"
-#          ; "-O2"
-#          ; "-pipe"
-#          ; "-fno-plt"
-#          ; "-fexceptions"
-#          ; "-Wp,-D_FORTIFY_SOURCE=2"
-#          ; "-Wformat"
-#          ; "-Werror=format-security"
-#          ; "-fstack-clash-protection"
-#          ; "-fcf-protection"
-#          ; "-g"
-#          ; "-ffile-prefix-map=/build/ocaml/src=/usr/src/debug/ocaml"
-#          ; "-flto=auto"
-#          ; "-ffat-lto-objects"
-#          ]
+#          [ "-O2"; "-fno-strict-aliasing"; "-fwrapv"; "-pthread"; "-fPIC" ]
 #      ; ocamlc_cppflags = [ "-D_FILE_OFFSET_BITS=64" ]
 #      ; ocamlopt_cflags =
-#          [ "-O2"
-#          ; "-fno-strict-aliasing"
-#          ; "-fwrapv"
-#          ; "-pthread"
-#          ; "-g"
-#          ; "-fno-omit-frame-pointer"
-#          ; "-fPIC"
-#          ; "-march=x86-64"
-#          ; "-mtune=generic"
-#          ; "-O2"
-#          ; "-pipe"
-#          ; "-fno-plt"
-#          ; "-fexceptions"
-#          ; "-Wp,-D_FORTIFY_SOURCE=2"
-#          ; "-Wformat"
-#          ; "-Werror=format-security"
-#          ; "-fstack-clash-protection"
-#          ; "-fcf-protection"
-#          ; "-g"
-#          ; "-ffile-prefix-map=/build/ocaml/src=/usr/src/debug/ocaml"
-#          ; "-flto=auto"
-#          ; "-ffat-lto-objects"
-#          ]
+#          [ "-O2"; "-fno-strict-aliasing"; "-fwrapv"; "-pthread"; "-fPIC" ]
 #      ; ocamlopt_cppflags = [ "-D_FILE_OFFSET_BITS=64" ]
 #      ; bytecomp_c_compiler =
 #          [ "gcc"
@@ -103,24 +61,7 @@ $ /usr/bin/ocamlc.opt -config > /tmp/dune_152e35_output
 #          ; "-fno-strict-aliasing"
 #          ; "-fwrapv"
 #          ; "-pthread"
-#          ; "-g"
-#          ; "-fno-omit-frame-pointer"
 #          ; "-fPIC"
-#          ; "-march=x86-64"
-#          ; "-mtune=generic"
-#          ; "-O2"
-#          ; "-pipe"
-#          ; "-fno-plt"
-#          ; "-fexceptions"
-#          ; "-Wp,-D_FORTIFY_SOURCE=2"
-#          ; "-Wformat"
-#          ; "-Werror=format-security"
-#          ; "-fstack-clash-protection"
-#          ; "-fcf-protection"
-#          ; "-g"
-#          ; "-ffile-prefix-map=/build/ocaml/src=/usr/src/debug/ocaml"
-#          ; "-flto=auto"
-#          ; "-ffat-lto-objects"
 #          ; "-D_FILE_OFFSET_BITS=64"
 #          ]
 #      ; bytecomp_c_libraries = [ "-lm"; "-lpthread" ]
@@ -130,24 +71,7 @@ $ /usr/bin/ocamlc.opt -config > /tmp/dune_152e35_output
 #          ; "-fno-strict-aliasing"
 #          ; "-fwrapv"
 #          ; "-pthread"
-#          ; "-g"
-#          ; "-fno-omit-frame-pointer"
 #          ; "-fPIC"
-#          ; "-march=x86-64"
-#          ; "-mtune=generic"
-#          ; "-O2"
-#          ; "-pipe"
-#          ; "-fno-plt"
-#          ; "-fexceptions"
-#          ; "-Wp,-D_FORTIFY_SOURCE=2"
-#          ; "-Wformat"
-#          ; "-Werror=format-security"
-#          ; "-fstack-clash-protection"
-#          ; "-fcf-protection"
-#          ; "-g"
-#          ; "-ffile-prefix-map=/build/ocaml/src=/usr/src/debug/ocaml"
-#          ; "-flto=auto"
-#          ; "-ffat-lto-objects"
 #          ; "-D_FILE_OFFSET_BITS=64"
 #          ]
 #      ; native_c_libraries = [ "-lm"; "-lpthread" ]
@@ -160,7 +84,7 @@ $ /usr/bin/ocamlc.opt -config > /tmp/dune_152e35_output
 #      ; system = "linux"
 #      ; asm = [ "as" ]
 #      ; asm_cfi_supported = true
-#      ; with_frame_pointers = true
+#      ; with_frame_pointers = false
 #      ; ext_exe = ""
 #      ; ext_obj = ".o"
 #      ; ext_asm = ".s"

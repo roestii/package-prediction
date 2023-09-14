@@ -13,6 +13,14 @@ type t = {
     is_damaged: bool;
 } [@@deriving show]
 
+let to_list package = 
+    let articles = Article.to_list package.articles in
+    let country = Country.to_list package.country in
+    let deliverer = Deliverer.to_list package.deliverer in
+    let cst_nr = Float.of_int package.cst_nr in
+    let is_damaged = if package.is_damaged then 1.0 else 0.0 in
+
+    (cst_nr :: package.weight :: package.size :: []) @ country @ deliverer @ articles @ (is_damaged :: [])
 
 let of_group group = 
     let open Float.O in

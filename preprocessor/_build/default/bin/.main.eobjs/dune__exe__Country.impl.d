@@ -1,1 +1,1 @@
-bin/country.pp.ml: Core Ppx_deriving_runtime
+bin/country.pp.ml: Core List Ppx_deriving_runtime

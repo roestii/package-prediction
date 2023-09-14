@@ -1,1 +1,1 @@
-bin/deliverer.pp.ml: Core Ppx_deriving_runtime
+bin/deliverer.pp.ml: Core List Ppx_deriving_runtime
