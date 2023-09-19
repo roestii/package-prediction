@@ -56,8 +56,12 @@ let _print_ratios ratios =
         printf "%d;%d\n" d nd) ratios
 
 let write_country_postal packages filename = 
-    let data = List.map ~f:(fun (el: Package.t) -> Array.of_list ((Country.to_string el.country) :: el.plz :: [])) packages in 
-    let arr = Array.of_list data in
+    let data = List.fold ~init:[] ~f:(fun acc (el: Package.t) -> 
+        let entries = List.map ~f:(fun (article, amount) -> 
+            (Country.to_string el.country) :: el.plz :: (Article.to_string article) :: (Float.to_string amount) :: []) el.articles in
+        entries @ acc
+        ) packages in 
+    let arr = Array.of_list (List.map ~f:Array.of_list data) in
     Owl_io.write_csv ~sep:',' arr filename
 
 let () = 
@@ -117,7 +121,7 @@ let () =
 
     (* weight based histogram of damaged packages*)
     let damaged_packages = List.filter ~f:(fun el -> el.is_damaged) packages in
-    write_country_postal damaged_packages "latsandlongs.csv";
+    write_country_postal damaged_packages "things.csv";
     (*printf "Damaged packages: %d" (List.length damaged_packages);*)
     (*let weights = List.map ~f:(fun el -> el.weight) damaged_packages in
     let weights = Array.of_list weights in
