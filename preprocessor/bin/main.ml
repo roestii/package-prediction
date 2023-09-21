@@ -55,7 +55,7 @@ let _print_ratios ratios =
     List.iter ~f:(fun (d, nd) -> 
         printf "%d;%d\n" d nd) ratios
 
-let write_country_postal packages filename = 
+let _write_country_postal packages filename = 
     let data = List.fold ~init:[] ~f:(fun acc (el: Package.t) -> 
         let entries = List.map ~f:(fun (article, amount) -> 
             (Country.to_string el.country) :: el.plz :: (Article.to_string article) :: (Float.to_string amount) :: []) el.articles in
@@ -108,20 +108,36 @@ let () =
     let arr = Array.of_list csv_data in
     Owl_io.write_csv ~sep:',' arr "out.csv";*)
 
-    (* json vec repr creation of packages -> out.jsonl
-        let vec_reprs = List.map ~f:(fun el -> 
-        let vec_repr = List.map ~f:(fun el -> `Float el) (Package.to_list el) in
+    (* json vec repr creation of packages -> out.jsonl*)
+    let valid_packages = List.filter ~f:(fun el -> 
+        let open Float.O in
+        el.size > 0.0 && el.weight > 0.0) packages in
+    let vec_reprs = List.map ~f:(fun el -> 
+        let articles = `List (List.map ~f:(fun (article, amount) -> 
+            `Assoc [ (Article.to_string article), `Float amount]
+        ) el.articles) in
+            
+        
         let package: (Yojson.t) = `Assoc [
             ("db_nr", `String el.db_nr);
-            ("vec_repr", `List vec_repr);
+            ("customer_nr", `String (Int.to_string el.cst_nr));
+            ("deliverer", `String (Deliverer.to_string el.deliverer));
+            ("size", `Float el.size);
+            ("weight", `Float el.weight);
+            ("location", `Assoc [
+                ("country", `String (Country.to_string el.country));
+                ("postal", `String el.plz);
+            ]);
+            ("articles", articles);
+            ("is_damaged", `Bool el.is_damaged);
         ] in 
-        Yojson.to_string package) packages in
+        Yojson.to_string package) valid_packages in
     
-    Out_channel.write_lines "out.jsonl" vec_reprs;*)
+    Out_channel.write_lines "out.jsonl" vec_reprs;
 
     (* weight based histogram of damaged packages*)
-    let damaged_packages = List.filter ~f:(fun el -> el.is_damaged) packages in
-    write_country_postal damaged_packages "things.csv";
+    (*let damaged_packages = List.filter ~f:(fun el -> el.is_damaged) packages in
+    write_country_postal damaged_packages "things.csv";*)
     (*printf "Damaged packages: %d" (List.length damaged_packages);*)
     (*let weights = List.map ~f:(fun el -> el.weight) damaged_packages in
     let weights = Array.of_list weights in

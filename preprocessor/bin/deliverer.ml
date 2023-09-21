@@ -39,6 +39,25 @@ let of_string str =
     | "WERKVK"-> Werkvk
     | _ -> failwith ("invalid deliverer code: " ^ str)
 
+let to_string deliverer = 
+    match deliverer with 
+    | Abholer -> "ABHOLER" 
+    | Abholung -> "ABHOLUNG" 
+    | Auslfa -> "AUSL._FA" 
+    | Dhl -> "DHL" 
+    | Infehler -> "IN. FEHLER" 
+    | Kep -> "KEP" 
+    | Meyerjumb -> "MEYER JUMB" 
+    | Post -> "POST" 
+    | Sped -> "SPED" 
+    | Speddsv -> "SPED/DSV" 
+    | Sped_osna -> "SPED_OSNA" 
+    | Tour_sped -> "TOUR_SPED" 
+    | Ups -> "UPS" 
+    | Ups_a_geb -> "UPS_A_GEB" 
+    | Ups_ch -> "UPS_CH" 
+    | Werkvk -> "WERKVK" 
+
 let to_int deliverer = 
     match deliverer with
     | Abholer -> 0
