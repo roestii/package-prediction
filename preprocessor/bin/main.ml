@@ -112,7 +112,7 @@ let () =
     let valid_packages = List.filter ~f:(fun el -> 
         let open Float.O in
         el.size > 0.0 && el.weight > 0.0) packages in
-    let vec_reprs = List.map ~f:(fun el -> 
+    (*let vec_reprs = List.map ~f:(fun el -> 
         let articles = `List (List.map ~f:(fun (article, amount) -> 
             `Assoc [ (Article.to_string article), `Float amount]
         ) el.articles) in
@@ -131,7 +131,21 @@ let () =
             ("articles", articles);
             ("is_damaged", `Bool el.is_damaged);
         ] in 
-        Yojson.to_string package) valid_packages in
+        Yojson.to_string package) valid_packages in*)
+    let damaged = List.filter ~f:(fun el -> el.is_damaged) valid_packages in
+    printf "damaged entries: %d" (List.length damaged);
+    let vec_reprs = List.map ~f:(fun el ->
+        let repr = List.map ~f:(fun v -> `Float v) (Package.to_list el) in
+        let is_damaged = if el.is_damaged then 1 else 0 in
+        let res = `Assoc [
+            ("db_nr", `String el.db_nr);
+            ("vec_repr", `List repr);
+            ("is_damaged", `Int is_damaged);
+        ] in
+
+        Yojson.to_string res
+    ) valid_packages in
+
     
     Out_channel.write_lines "out.jsonl" vec_reprs;
 

@@ -46,6 +46,7 @@ struct NaiveLocation {
 struct FullLocation {
     country: String,
     postal: String,
+    name: String,
     lat: f64,
     lon: f64
 }
@@ -111,7 +112,7 @@ async fn main() -> Result<()> {
             println!("{}", (idx * 100) / len);
         }
 
-        let Some((lat, lon)) = geolocate(client, &location.country, &location.postal).await else {
+        let Some((lat, lon, name)) = geolocate(client, &location.country, &location.postal).await else {
             continue;
         };
         
@@ -120,6 +121,7 @@ async fn main() -> Result<()> {
             postal: location.postal.clone(),
             lat,
             lon,
+            name: name.to_string(),
         };
 
         location_map.insert(location, full_location);
@@ -149,7 +151,7 @@ async fn main() -> Result<()> {
 }
 
 #[async_recursion]
-async fn geolocate(client: reqwest::Client, country: &str, postal: &str) -> Option<(f64, f64)> {
+async fn geolocate(client: reqwest::Client, country: &str, postal: &str) -> Option<(f64, f64, &'static str)> {
     let url = "https://nominatim.openstreetmap.org/search?";
     let url = format!("{}country={}&postalcode={}&format=json", url, country, postal);
     let response = client.get(&url)
@@ -166,6 +168,12 @@ async fn geolocate(client: reqwest::Client, country: &str, postal: &str) -> Opti
                 return None;
             }
 
+            let name = inner[0].get("display_name")
+                .expect("name to exist")
+                .as_str()
+                .expect("display name to be a string")
+                .to_string();
+
             let lat: f64 = inner[0].get("lat")
                 .expect("lat to exist")
                 .as_str()
@@ -181,7 +189,7 @@ async fn geolocate(client: reqwest::Client, country: &str, postal: &str) -> Opti
                 .expect("lon to be a float");
 
             println!("gotcha");
-            Some((lat, lon))
+            Some((lat, lon, name))
         },
         _ => {
             println!("retrying");

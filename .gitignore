@@ -2,3 +2,4 @@ data/
 **/_build
 **/venv
 **/target
+**/models
