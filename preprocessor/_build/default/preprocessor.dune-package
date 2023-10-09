@@ -1,4 +1,6 @@
 (lang dune 3.10)
 (name preprocessor)
 (sections (lib .) (bin ../../bin))
-(files (lib (META dune-package opam)) (bin (preprocessor)))
+(files
+ (lib (META dune-package opam))
+ (bin (cities deliverer_analysis preprocessor)))

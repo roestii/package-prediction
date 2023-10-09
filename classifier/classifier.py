@@ -122,7 +122,7 @@ def feature_names():
     ]
 
 #assuming the given file has the jsonl format
-def dataset_from_path(path, ratio=0.5):
+def dataset_from_path(path):
     with open(path, "r") as dataset_file:
         entries = list(map(json.loads, dataset_file))
         xs = list(map(lambda x: x["vec_repr"], entries))
@@ -166,6 +166,7 @@ class RfClassifier:
 
         test_positives = list(filter(lambda x: x == 1, y_test))
         test_negatives = list(filter(lambda x: x == 0, y_test))
+
         print("len test: ", len(y_test))
         print("test positives: ", len(test_positives))
         print("test positives: ", len(test_negatives))
@@ -195,7 +196,7 @@ def main():
     model.fit()
     model.save("oversampled.pkl")
     #model.visualize()
-    #model.save("cs_undersampled.pkl")
+    model.save("balanced_oversampled.pkl")
     #_, y = model.dataset
 
     #positives = list(filter(lambda x: x == 1, y))

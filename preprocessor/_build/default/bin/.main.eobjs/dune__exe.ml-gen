@@ -3,11 +3,17 @@
 (** @canonical Dune__exe.Article *)
 module Article = Dune__exe__Article
 
+(** @canonical Dune__exe.Cities *)
+module Cities = Dune__exe__Cities
+
 (** @canonical Dune__exe.Country *)
 module Country = Dune__exe__Country
 
 (** @canonical Dune__exe.Deliverer *)
 module Deliverer = Dune__exe__Deliverer
+
+(** @canonical Dune__exe.Deliverer_analysis *)
+module Deliverer_analysis = Dune__exe__Deliverer_analysis
 
 (** @canonical Dune__exe.Main *)
 module Main = Dune__exe__Main

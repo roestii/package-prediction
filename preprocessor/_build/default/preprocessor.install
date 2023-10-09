@@ -4,5 +4,7 @@ lib: [
   "_build/install/default/lib/preprocessor/opam"
 ]
 bin: [
+  "_build/install/default/bin/cities"
+  "_build/install/default/bin/deliverer_analysis"
   "_build/install/default/bin/preprocessor"
 ]

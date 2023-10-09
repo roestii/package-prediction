@@ -148,6 +148,7 @@ let () =
 
     
     Out_channel.write_lines "out.jsonl" vec_reprs;
+    
 
     (* weight based histogram of damaged packages*)
     (*let damaged_packages = List.filter ~f:(fun el -> el.is_damaged) packages in

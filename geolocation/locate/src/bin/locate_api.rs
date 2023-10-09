@@ -121,7 +121,7 @@ async fn main() -> Result<()> {
             postal: location.postal.clone(),
             lat,
             lon,
-            name: name.to_string(),
+            name,
         };
 
         location_map.insert(location, full_location);
@@ -151,7 +151,7 @@ async fn main() -> Result<()> {
 }
 
 #[async_recursion]
-async fn geolocate(client: reqwest::Client, country: &str, postal: &str) -> Option<(f64, f64, &'static str)> {
+async fn geolocate(client: reqwest::Client, country: &str, postal: &str) -> Option<(f64, f64, String)> {
     let url = "https://nominatim.openstreetmap.org/search?";
     let url = format!("{}country={}&postalcode={}&format=json", url, country, postal);
     let response = client.get(&url)
