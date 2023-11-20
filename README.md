@@ -68,14 +68,14 @@ Hier werden ausschließlich diese Parameter betrachtet (einschließlich der Klas
 
 | Datensatz | Resampling | K | cw | TN | FP | FN | TP | Accuracy | Recall |
 | - | - | - | - | - | - | - | - | - | - |
-| wol | - | SVM | linear | 5:1 | 22273 | 0 | 206 | .991 | 0. |
-| wol | - | SVM | linear | 2000:1 | 1416 | 20860 | 1 | 202 | .072 | .995 |
-| wol | - | SVM | linear | 10000:1 | 1729 | 20565 | 2 | 183 | .085 | .989 |
-| wol | - | SVM | poly | 100:1 | 21109 | 1157 | 175 | 38 | .941 | .178 |
-| wol | - | SVM | poly | 2000:1 | 1416 | 20860 | 1 | 202 | .072 | .995 |
-| wol | - | SVM | poly | 10000:1 | 24 | 22249 | 0 | 206 | .01 | 1. |
-| wol | - | SVM | poly | auto | 21165 | 1106 | 170 | 38 | .943 | .183 |
-| wl | - | SVM | poly | auto | 16919 | 1440 | 144 | 38 | .915 | .21 |
+| wol | - | linear | 5:1 | 22273 | 0 | 206 | 0 | .991 | 0. | 
+| wol | - | linear | 2000:1 | 1416 | 20860 | 1 | 202 | .072 | .995 |
+| wol | - | linear | 10000:1 | 1729 | 20565 | 2 | 183 | .085 | .989 |
+| wol | - | poly | 100:1 | 21109 | 1157 | 175 | 38 | .941 | .178 |
+| wol | - | poly | 2000:1 | 1416 | 20860 | 1 | 202 | .072 | .995 |
+| wol | - | poly | 10000:1 | 24 | 22249 | 0 | 206 | .01 | 1. |
+| wol | - | poly | auto | 21165 | 1106 | 170 | 38 | .943 | .183 |
+| wl | - | poly | auto | 16919 | 1440 | 144 | 38 | .915 | .21 |
 
 ### Evaluation der LightGBM Modelle
 
@@ -97,3 +97,5 @@ Hier werden ausschließlich diese Parameter betrachtet (einschließlich der Klas
 | TN | FP | FN | TP | Accuracy | Recall |
 | - | - | - | - | - | - | 
 | 13811 | 885 | 103 | 34 | .933 | .248 |
+
+
