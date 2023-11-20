@@ -68,7 +68,7 @@ Hier werden ausschließlich diese Parameter betrachtet (einschließlich der Klas
 
 | Datensatz | Resampling | K | cw | TN | FP | FN | TP | Accuracy | Recall |
 | - | - | - | - | - | - | - | - | - | - |
-| wol | - | SVM | linear | 5:1 | 22273 | 0 | 206 | 0. | .991 |
+| wol | - | SVM | linear | 5:1 | 22273 | 0 | 206 | .991 | 0. |
 | wol | - | SVM | linear | 2000:1 | 1416 | 20860 | 1 | 202 | .072 | .995 |
 | wol | - | SVM | linear | 10000:1 | 1729 | 20565 | 2 | 183 | .085 | .989 |
 | wol | - | SVM | poly | 100:1 | 21109 | 1157 | 175 | 38 | .941 | .178 |
