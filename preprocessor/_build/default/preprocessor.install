@@ -5,6 +5,8 @@ lib: [
 ]
 bin: [
   "_build/install/default/bin/cities"
+  "_build/install/default/bin/cutter"
   "_build/install/default/bin/deliverer_analysis"
   "_build/install/default/bin/preprocessor"
+  "_build/install/default/bin/vectorize"
 ]

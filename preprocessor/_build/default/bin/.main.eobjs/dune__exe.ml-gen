@@ -9,11 +9,17 @@ module Cities = Dune__exe__Cities
 (** @canonical Dune__exe.Country *)
 module Country = Dune__exe__Country
 
+(** @canonical Dune__exe.Cutter *)
+module Cutter = Dune__exe__Cutter
+
 (** @canonical Dune__exe.Deliverer *)
 module Deliverer = Dune__exe__Deliverer
 
 (** @canonical Dune__exe.Deliverer_analysis *)
 module Deliverer_analysis = Dune__exe__Deliverer_analysis
+
+(** @canonical Dune__exe.Distance_feature *)
+module Distance_feature = Dune__exe__Distance_feature
 
 (** @canonical Dune__exe.Main *)
 module Main = Dune__exe__Main
@@ -21,5 +27,14 @@ module Main = Dune__exe__Main
 (** @canonical Dune__exe.Package *)
 module Package = Dune__exe__Package
 
+(** @canonical Dune__exe.Package_j *)
+module Package_j = Dune__exe__Package_j
+
+(** @canonical Dune__exe.Package_t *)
+module Package_t = Dune__exe__Package_t
+
 (** @canonical Dune__exe.Plotting *)
 module Plotting = Dune__exe__Plotting
+
+(** @canonical Dune__exe.Vectorize *)
+module Vectorize = Dune__exe__Vectorize

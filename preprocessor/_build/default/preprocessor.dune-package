@@ -3,4 +3,5 @@
 (sections (lib .) (bin ../../bin))
 (files
  (lib (META dune-package opam))
- (bin (cities deliverer_analysis preprocessor)))
+ (bin
+  (cities cutter deliverer_analysis distance_feature preprocessor vectorize)))

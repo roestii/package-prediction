@@ -156,6 +156,7 @@ class RfClassifier:
     def fit(self) :
         x, y = self.dataset
         x_train, x_test, y_train, y_test = train_test_split(x, y, shuffle=True, test_size=self.ratio)
+        print(y_test)
 
         train_positives = list(filter(lambda x: x == 1, y_train))
         train_negatives = list(filter(lambda x: x == 0, y_train))
@@ -186,17 +187,16 @@ class RfClassifier:
 
     def save(self, path):
         with open(path, "wb") as out:
-            pickle.dump(self, out)
+            pickle.dump(self.classifier, out)
 
 def main():
-    dataset = dataset_from_path("../data/dataset_base.jsonl")
+    dataset = dataset_from_path("../data/with_cutted/leftover.jsonl")
     model = RfClassifier(dataset)
     #model.undersample()
     model.oversample()
     model.fit()
-    model.save("oversampled.pkl")
     #model.visualize()
-    model.save("balanced_oversampled.pkl")
+    model.save("leftover_model.pkl")
     #_, y = model.dataset
 
     #positives = list(filter(lambda x: x == 1, y))

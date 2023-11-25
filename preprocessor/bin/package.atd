@@ -1,0 +1,17 @@
+type package = {
+    db_nr: string;
+    customer_nr: int;
+    articles: (string * float) list; 
+    weight: float;
+    size: float;
+    location: location;
+    deliverer: string;
+    is_damaged: bool;
+} 
+
+type location = {
+    country: string;
+    postal: string;
+    lat: float;
+    lon: float;
+}

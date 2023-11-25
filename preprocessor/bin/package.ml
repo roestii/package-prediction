@@ -1,4 +1,5 @@
 open Core 
+open Package_t
 
 type t = {
     db_nr: string;
@@ -7,11 +8,33 @@ type t = {
     articles: (Article.t * float) list; 
     weight: float;
     size: float;
+    lat: float;
+    lon: float;
     deliverer: Deliverer.t;
     country: Country.t;
     plz: string;
     is_damaged: bool;
 } [@@deriving show]
+
+let of_package_j (package_j: package) =
+    let articles = List.map package_j.articles ~f:(fun (article, amount) -> 
+        ((Article.of_string article), amount)) in
+    let country = Country.of_string package_j.location.country in
+    let deliverer = Deliverer.of_string package_j.deliverer in
+
+    {   db_nr = package_j.db_nr;
+        pkg_nr = 1;
+        size = package_j.size;
+        weight = package_j.weight;
+        articles;
+        country;
+        deliverer;
+        cst_nr = package_j.customer_nr;
+        lat = package_j.location.lat;
+        lon = package_j.location.lon;
+        plz = package_j.location.postal;
+        is_damaged = package_j.is_damaged;
+    }
 
 let to_list package = 
     let articles = Article.to_list package.articles in
@@ -20,7 +43,7 @@ let to_list package =
     (*let cst_nr = Float.of_int package.cst_nr in
     let is_damaged = if package.is_damaged then 1.0 else 0.0 in*)
 
-    (package.weight :: package.size :: []) @ country @ deliverer @ articles @ []
+    (package.weight :: package.size :: package.lon :: package.lat :: []) @ country @ deliverer @ articles @ []
 
 let of_group group = 
     let open Float.O in
@@ -45,6 +68,8 @@ let of_group group =
         weight;
         size;
         country;
+        lat = 0.;
+        lon = 0.;
         plz;
         deliverer;
         articles;
