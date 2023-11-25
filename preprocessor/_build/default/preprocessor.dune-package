@@ -1,7 +1,0 @@
-(lang dune 3.10)
-(name preprocessor)
-(sections (lib .) (bin ../../bin))
-(files
- (lib (META dune-package opam))
- (bin
-  (cities cutter deliverer_analysis distance_feature preprocessor vectorize)))
