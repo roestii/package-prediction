@@ -21,9 +21,7 @@ def main():
 
     clusterer, probs = probs_by_cluster(x_train, y_train)
 
-    print(f"before {x_train}")
     x_train = add_cluster_feature(x_train, clusterer, probs)
-    print(f"after {x_train}")
     x_test = add_cluster_feature(x_test, clusterer, probs)
     x_val = add_cluster_feature(x_val, clusterer, probs)
 
@@ -103,7 +101,6 @@ def dataset(path: str) -> tuple[np.ndarray, np.ndarray]:
 
 def probs_by_cluster(x, y):
     df = pd.DataFrame(zip(x, y), columns=["vec_repr", "is_damaged"])
-    print(df)
 
     latitudes = df["vec_repr"].apply(lambda x: x[4])
     longitudes = df["vec_repr"].apply(lambda x: x[3])
