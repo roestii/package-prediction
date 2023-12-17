@@ -1,5 +1,5 @@
 (executables
- (public_names preprocessor cities deliverer_analysis)
- (names main cities deliverer_analysis)
- (libraries preprocessor core owl owl-plplot yojson cohttp cohttp-lwt-unix)
+ (public_names preprocessor cities deliverer_analysis cutter vectorize distance_feature)
+ (names main cities deliverer_analysis cutter vectorize distance_feature)
+ (libraries preprocessor atdgen core owl owl-plplot yojson cohttp cohttp-lwt-unix)
  (preprocess (pps ppx_deriving.show ppx_let)))

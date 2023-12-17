@@ -1,5 +1,7 @@
 data/
+**/__pycache__
 **/_build
 **/venv
 **/target
 **/models
+**/target
