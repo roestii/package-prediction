@@ -9,6 +9,7 @@ Transportschadenvorhersage:
 - *mixed_ensemble.py*: Datei für die Erstellung eines Ensemble Klassifizierers bestehend aus LightGBM und Support Vector Klassifizierern.
 - *lgbm_only_ensemble.py*: Datei für die Erstellung eines Ensemble Klassifizierers bestehend aus LightGBM Klassifizierern.
 - *grid_search_lgbm.py*: Implementierung einer GridSearch zur Hyperparameter-Optimierung eines LightGBM Modells.
+- *gating.py*: Datei zur Erstellung eines Neuronalen Netzes, das für das Gating eines LGBM-Ensembles verantwortlich ist. Das Netz bestimmt für einen gegebenenen Datenpunkt, welche Klassifizierer es benutzen soll.
 
 Im Ordner `geolocate` befinden sich Dateien zur Bestimmung des Längen- und Breitengrades einer Zielortes für eine 
 Bestellung auf Grundlage der Postleitzahl. 
