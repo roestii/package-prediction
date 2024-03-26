@@ -1,5 +1,24 @@
 ## Evaluation verschiedener Modelle zur Vorhersage von Transportschäden
 
+### Ordnerstruktur
+
+Im Ordner `classifier` befinden sich Dateien zur Erstellung und Evaluation verschiedener Modelle zur 
+Transportschadenvorhersage:
+- *rf_classifier.py*: Datei für das Training und die Evaluation eines Random Forest Klassifizierers.
+- *svc_classifier.py*: Datei für das Training und die Evaluation eines Support Vector Klassifizierers.
+- *mixed_ensemble.py*: Datei für die Erstellung eines Ensemble Klassifizierers bestehend aus LightGBM und Support Vector Klassifizierern.
+- *lgbm_only_ensemble.py*: Datei für die Erstellung eines Ensemble Klassifizierers bestehend aus LightGBM Klassifizierern.
+- *grid_search_lgbm.py*: Implementierung einer GridSearch zur Hyperparameter-Optimierung eines LightGBM Modells.
+
+Im Ordner `geolocate` befinden sich Dateien zur Bestimmung des Längen- und Breitengrades einer Zielortes für eine 
+Bestellung auf Grundlage der Postleitzahl. 
+
+Darüber hinaus enthält der Ordner `map` eine html-Seite zur Visualisierung der Schadensraten pro Ort.
+
+Der Ordner `preprocessor` umfasst eine Pipeline zur Aufbereitung und Bereinigung der rohen Excel-Dateien.
+
+Der Ordner `vectorize` enthält ein Tool zur Vektorisierung eines Pakets inklusive der Distanzbestimmung von Espelkamp bis zum ermittelten Längen- und Breitengrad.
+
 ### Erläuterungen
 
 Die Evaluation zur Beurteilung der Vorhersage von Transportschäden mit Hilfe von Methoden des

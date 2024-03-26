@@ -1,8 +1,3 @@
-1. Vorverarbeitung des Datensatzes (Entfernen von invaliden Einträgen, Zusammenfassung von Paketen) 
-2. Aufteilung des Datensatzes 
-3. Die *Minderheitsklasse* (_beschädigt_) wird mit Hilfe der Synthetic Minority Oversampling Technique oversampled.
-4. Zur Klassifikation wird ein Random Forest Classifier benutzt.
-
 ## Evaluation verschiedener Modelle zur Vorhersage von Transportschäden
 
 ### Erläuterungen
@@ -71,29 +66,36 @@ Hier werden ausschließlich diese Parameter betrachtet (einschließlich der Klas
 
 ### Evaluation der SVM Modelle
 
-| Datensatz | Resampling | K | cw | TN | FP | FN | TP |
-| - | - | - | - | - | - | - | - |
-| wol | - | SVM | linear | 5:1 | 22273 | 0 | 206 | 0 |
-| wol | - | SVM | linear | 2000:1 | 1416 | 20860 | 1 | 202 |
-| wol | - | SVM | linear | 10000:1 | 1729 | 20565 | 2 | 183 |
-| wol | - | SVM | poly | 100:1 | 21109 | 1157 | 175 | 38 |
-| wol | - | SVM | poly | 2000:1 | 1416 | 20860 | 1 | 202 |
-| wol | - | SVM | poly | 10000:1 | 24 | 22249 | 0 | 206 |
-| wol | - | SVM | poly | auto | 21165 | 1106 | 170 | 38 |
-| wl | - | SVM | poly | auto | 16919 | 1440 | 144 | 38 |
+| Datensatz | Resampling | K | cw | TN | FP | FN | TP | Accuracy | Recall |
+| - | - | - | - | - | - | - | - | - | - |
+| wol | - | linear | 5:1 | 22273 | 0 | 206 | 0 | .991 | 0. | 
+| wol | - | linear | 2000:1 | 1416 | 20860 | 1 | 202 | .072 | .995 |
+| wol | - | linear | 10000:1 | 1729 | 20565 | 2 | 183 | .085 | .989 |
+| wol | - | poly | 100:1 | 21109 | 1157 | 175 | 38 | .941 | .178 |
+| wol | - | poly | 2000:1 | 1416 | 20860 | 1 | 202 | .072 | .995 |
+| wol | - | poly | 10000:1 | 24 | 22249 | 0 | 206 | .01 | 1. |
+| wol | - | poly | auto | 21165 | 1106 | 170 | 38 | .943 | .183 |
+| wl | - | poly | auto | 16919 | 1440 | 144 | 38 | .915 | .21 |
 
-### Evaluation der SVM Modelle
-| Datensatz | Resampling | th | nbr | cw | TN | FP | FN | TP |
-| - | - | - | - | - | - | - | - | - |
-| wol | - | 0.6 | 1000 | auto | 21884 | 381 | 199 | 15 |
-| wol | - | 0.4 | 1000 | auto | 21534 | 773 | 147 | 25 |
-| wl | - | 0.4 | 1000 | auto | 18263 | 122 | 154 | 2 |
-| wl | - | 0.3 | 500 | auto | 17663 | 724 | 136 | 18 |
-| wl | - | 0.4 | 250 | auto | 16942 | 1430 | 131 | 38 |
-| wol | - | 0.4 | 250 | auto | 15645 | 2181 | 106 | 51 |
-| wol | (sos1) | 0.5 | 100 | auto | 17928 | 442 | 148 | 23 |
-| wol | (sos1) | 0.3 | 500 | auto | 17993 | 379 | 152 | 17 |
-| wol | (sos.5) -> (rus) | 0.5 | 100 | auto | 17842 | 528 | 146 | 25 |
-| wol | (sos.1) -> (rus) | 0.5 | 100 | auto | 17370 | 1001 | 138 | 32 |
+### Evaluation der LightGBM Modelle
+
+| Datensatz | Resampling | th | nbr | cw | TN | FP | FN | TP | Accuracy | Recall |
+| - | - | - | - | - | - | - | - | - | - | - |
+| wol | - | 0.6 | 1000 | auto | 21884 | 381 | 199 | 15 | .974 | .07 |
+| wol | - | 0.4 | 1000 | auto | 21534 | 773 | 147 | 25 | .959 | .145 |
+| wl | - | 0.4 | 1000 | auto | 18263 | 122 | 154 | 2 | .985 | .013 |
+| wl | - | 0.3 | 500 | auto | 17663 | 724 | 136 | 18 | .954 | .117 |
+| wl | - | 0.4 | 250 | auto | 16942 | 1430 | 131 | 38 | .916 | .225 |
+| wol | - | 0.4 | 250 | auto | 15645 | 2181 | 106 | 51 | .873 | .325 |
+| wol | (sos1) | 0.5 | 100 | auto | 17928 | 442 | 148 | 23 | .968 | .135 |
+| wol | (sos1) | 0.3 | 500 | auto | 17993 | 379 | 152 | 17 | .971 | 0.1 |
+| wol | (sos.5) -> (rus) | 0.5 | 100 | auto | 17842 | 528 | 146 | 25 | .964 | .146 |
+| wol | (sos.1) -> (rus) | 0.5 | 100 | auto | 17370 | 1001 | 138 | 32 | .939 | .188 |
+
+### Evaluation der Ensemble 
+
+| TN | FP | FN | TP | Accuracy | Recall |
+| - | - | - | - | - | - | 
+| 13811 | 885 | 103 | 34 | .933 | .248 |
 
 
