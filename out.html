@@ -1,0 +1,20 @@
+<h1>Modell zur Transportschadenvorhersage</h1>
+
+<h2>Vorgehen</h2>
+
+<ol>
+<li>11/12 des Datensatzes wurden in einen Trainings- und Testdatensatz aufgeteilt. </li>
+<li>Das übrige 1/12 wird als Validierungsdatensatz herangezogen (enthält ausschließlich reale, keine synthetischen Daten)</li>
+<li>Die <em>Minderheitsklasse</em> (<em>beschädigt</em>) wird mit Hilfe der Synthetic Minority Oversampling Technique oversampled.</li>
+<li>Zur Klassifikation wird ein Random Forest Classifier benutzt.</li>
+</ol>
+
+<h2>Datensatz</h2>
+
+<p>| Datensatz | Samples N | Samples T |
+| - | - | - |
+| Trainingsdatensatz | 71285 | 71265 | 
+| Testdatensatz | 17829 | 17809 |
+| Validierungs | 75 | 8100 |</p>
+
+<h2>Ergebnisse</h2>
