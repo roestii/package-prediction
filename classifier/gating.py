@@ -86,7 +86,7 @@ def main():
     x_test, y_test = test_dataset
     predictions = np.array([model.predict(x_test) for model in models])
     predictions = predictions.transpose()
-    xs = torch.tensor(predictions, dtype=torch.float32)
+    xs = torch.tensor(x_test, dtype=torch.float32)
     routes = gating_model(xs).detach().numpy()
 
     y_pred = []
@@ -124,7 +124,7 @@ def make_data(models, data):
         best = np.argsort(diff)[:2]
         out.append([1 if i in best else 0 for i in range(len(models))])
 
-    return predictions, out
+    return xs, out
         
 
 def lgbm_model_from_obj(obj, xs, ys):

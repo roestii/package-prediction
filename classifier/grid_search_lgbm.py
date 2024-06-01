@@ -1,4 +1,6 @@
 import lightgbm
+import time
+import os
 import numpy as np
 import pandas as pd
 from sklearn.model_selection import train_test_split
@@ -24,8 +26,8 @@ def grid():
     grid = {
         "threshold": [0.4, 0.5, 0.6],
         "num_leaves": [20, 30, 50],
-        "num_boost_round": [300, 400, 500],
-        "use_smote": [(False, 0), (True, 0.5), (True, 1)],
+        "num_boost_round": [200, 300, 400, 500],
+        "use_smote": [(False, 0)],
         "use_under_sampling": [(False, 0), (True, 0.5), (True, 1)],
         "dataset": [0, 1, 2],
     }
@@ -43,11 +45,16 @@ def train(
         "num_leaves": num_leaves,
         "metric": "binary_logloss",
         "is_unbalance": True,
+        "verbosity": 0
     }
 
     train_data = lightgbm.Dataset(x_train, label=y_train)
     classifier = lightgbm.train(params, train_data, num_boost_round=num_boost_round)
     return classifier
+
+def normalized_precision(matrix):
+    factor = (matrix[1][0] + matrix[1][1]) / (matrix[0][0] + matrix[0][1])
+    return matrix[1][1] / (matrix[1][1] + factor * matrix[0][1])
 
 def evaluate(classifier, x_test, y_test, threshold):
     y_pred = classifier.predict(x_test, num_iteration=classifier.best_iteration)
@@ -57,6 +64,7 @@ def evaluate(classifier, x_test, y_test, threshold):
     matrix = confusion_matrix(y_true=y_test, y_pred=y_pred)
     recall = recall_score(y_true=y_test, y_pred=y_pred)
     precision = precision_score(y_true=y_test, y_pred=y_pred)
+    precision = normalized_precision(matrix)
 
     return {
         "accuracy": accuracy,
@@ -77,19 +85,25 @@ def main():
         "use_smote", 
         "use_under_sampling", 
         "dataset", 
-        "accuracy", 
-        "recall",
-        "precision",
-        "tn",
-        "fp",
-        "fn",
-        "tp"
+        "num_leaves",
+        "test_accuracy", 
+        "test_recall",
+        "test_precision",
+        "test_tn",
+        "test_fp",
+        "test_fn",
+        "test_tp",
+        "val_accuracy", 
+        "val_recall",
+        "val_precision",
+        "val_tn",
+        "val_fp",
+        "val_fn",
+        "val_tp"
     ]
 
     eval_dt = pd.DataFrame(columns=columns)
-    for i, (use_oversampling, os_strategy) in enumerate(grd["use_smote"]):
-        for _ in range(10): 
-            print(f"Grid search iteration {i} of {len(grd['use_smote'])}")
+    for use_oversampling, os_strategy in grd["use_smote"]:
         for (use_undersampling, us_strategy) in grd["use_under_sampling"]:
             for ds in grd["dataset"]:
                 dataset = data[ds]
@@ -108,22 +122,34 @@ def main():
                     for num_leaves in grd["num_leaves"]:
                         model = train(num, num_leaves, x_train, y_train)
                         for threshold in grd["threshold"]:
-                            evaluation = evaluate(model, dataset.x_test, dataset.y_test, threshold)
-                            print(evaluation)
+                            test_evaluation = evaluate(model, dataset.x_test, dataset.y_test, threshold)
+                            val_evaluation = evaluate(model, dataset.x_val, dataset.y_val, threshold)
+
                             eval_dt.loc[len(eval_dt)] = [
                                 threshold, 
                                 num, 
-                                use_oversampling, 
-                                use_undersampling, 
+                                (use_oversampling, os_strategy), 
+                                (use_undersampling, us_strategy), 
                                 ds, 
-                                evaluation["accuracy"], 
-                                evaluation["recall"],
-                                evaluation["precision"],
-                                evaluation["tn"],
-                                evaluation["fp"],
-                                evaluation["fn"],
-                                evaluation["tp"]
+                                num_leaves,
+                                test_evaluation["accuracy"], 
+                                test_evaluation["recall"],
+                                test_evaluation["precision"],
+                                test_evaluation["tn"],
+                                test_evaluation["fp"],
+                                test_evaluation["fn"],
+                                test_evaluation["tp"],
+                                val_evaluation["accuracy"], 
+                                val_evaluation["recall"],
+                                val_evaluation["precision"],
+                                val_evaluation["tn"],
+                                val_evaluation["fp"],
+                                val_evaluation["fn"],
+                                val_evaluation["tp"]
                             ]
+
+                        os.system("clear")
+                        print(eval_dt.tail(n=10))
 
     eval_dt.to_csv("../data/grid_search_results.csv")
 
